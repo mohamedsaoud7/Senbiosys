@@ -63,6 +63,13 @@ flutter:
     - assets/ring_icon.png
     - assets/charging_station.png
     - assets/ring_dock.png
+    - assets/velia_ring.png
+    - assets/carousel_1.png
+    - assets/carousel_2.png
+    - assets/carousel_3.png
+    - assets/login_carousel_1.png
+    - assets/login_carousel_2.png
+    - assets/login_carousel_3.png
 
   fonts:
     - family: Cormorant Garamond

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:training/screens/create_account/sync_app_screen.dart';
 import 'package:training/widgets/account_background.dart';
 import 'package:training/widgets/app_button.dart';
 
@@ -74,7 +75,14 @@ class RingDockScreen extends StatelessWidget {
               text: 'Continue',
               backgroundColor: const Color(0xFFF8F8F7),
               foregroundColor: const Color(0xFF20232A),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const SyncAppScreen(),
+                  ),
+                );
+              },
             ),
           ],
         ),

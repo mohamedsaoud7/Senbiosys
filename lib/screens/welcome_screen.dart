@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:training/screens/create_account/email_screen.dart';
+import 'package:training/screens/login/login_screen.dart';
 import 'package:training/widgets/app_button.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -89,7 +90,14 @@ class WelcomeScreen extends StatelessWidget {
                     text: 'Log in',
                     backgroundColor: const Color(0xFFF7F7F6),
                     foregroundColor: const Color(0xFF20232A),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (_) => const LoginScreen(),
+                        ),
+                      );
+                    },
                   ),
                   const SizedBox(height: 10),
                   AppButton(
