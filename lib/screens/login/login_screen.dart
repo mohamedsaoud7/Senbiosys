@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:training/screens/login/alcohol_use_screen.dart';
 import 'package:training/widgets/account_background.dart';
 import 'package:training/widgets/app_button.dart';
 
@@ -174,7 +175,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     runSpacing: 7,
                     children: [
                       _choice('Tobacco use  +'),
-                      _choice('Alcohol use  +'),
+                      _choice(
+                        'Alcohol use  +',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (_) => const AlcoholUseScreen(),
+                            ),
+                          );
+                        },
+                      ),
                       _choice('Physical activity  +'),
                       _choice('Stress levels  +'),
                       _choice('60 kg  ›'),
@@ -199,15 +210,18 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _choice(String text) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      decoration: BoxDecoration(
-        color: const Color(0xFF172238),
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFF29354B)),
+  Widget _choice(String text, {VoidCallback? onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        decoration: BoxDecoration(
+          color: const Color(0xFF172238),
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: const Color(0xFF29354B)),
+        ),
+        child: Text(text, style: const TextStyle(fontSize: 11)),
       ),
-      child: Text(text, style: const TextStyle(fontSize: 11)),
     );
   }
 }

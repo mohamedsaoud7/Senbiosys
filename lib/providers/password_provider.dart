@@ -4,7 +4,6 @@ class PasswordProvider extends ChangeNotifier {
   String _password = '';
   bool _obscurePassword = true;
 
-  String get password => _password;
   bool get obscurePassword => _obscurePassword;
 
   bool get hasLowercase => RegExp(r'[a-z]').hasMatch(_password);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:training/providers/create_account_provider.dart';
 import 'package:training/providers/password_provider.dart';
 import 'package:training/screens/create_account/birth_date_screen.dart';
 import 'package:training/widgets/account_background.dart';
@@ -10,6 +11,11 @@ class PasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final accountProvider = Provider.of<CreateAccountProvider>(
+      context,
+      listen: false,
+    );
+
     return ChangeNotifierProvider(
       create: (_) => PasswordProvider(),
       child: Consumer<PasswordProvider>(
@@ -54,6 +60,7 @@ class PasswordScreen extends StatelessWidget {
                     textInputAction: TextInputAction.done,
                     onChanged: (value) {
                       passwordProvider.updatePassword(value);
+                      accountProvider.savePassword(value);
                     },
                     style: const TextStyle(fontSize: 16),
                     decoration: InputDecoration(

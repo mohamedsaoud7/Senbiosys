@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:training/providers/create_account_provider.dart';
 import 'package:training/screens/create_account/height_screen.dart';
 import 'package:training/widgets/account_background.dart';
 import 'package:training/widgets/app_button.dart';
@@ -9,6 +11,11 @@ class BirthDateScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final accountProvider = Provider.of<CreateAccountProvider>(
+      context,
+      listen: false,
+    );
+
     return AccountBackground(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
@@ -37,13 +44,29 @@ class BirthDateScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const Row(
+            Row(
               children: [
-                Expanded(child: _DateField(maxLength: 2, autofocus: true)),
-                SizedBox(width: 4),
-                Expanded(child: _DateField(maxLength: 2)),
-                SizedBox(width: 4),
-                Expanded(child: _DateField(maxLength: 4)),
+                Expanded(
+                  child: _DateField(
+                    maxLength: 2,
+                    autofocus: true,
+                    onChanged: accountProvider.saveDay,
+                  ),
+                ),
+                const SizedBox(width: 4),
+                Expanded(
+                  child: _DateField(
+                    maxLength: 2,
+                    onChanged: accountProvider.saveMonth,
+                  ),
+                ),
+                const SizedBox(width: 4),
+                Expanded(
+                  child: _DateField(
+                    maxLength: 4,
+                    onChanged: accountProvider.saveYear,
+                  ),
+                ),
               ],
             ),
             const Spacer(),
@@ -67,10 +90,15 @@ class BirthDateScreen extends StatelessWidget {
 }
 
 class _DateField extends StatelessWidget {
-  const _DateField({required this.maxLength, this.autofocus = false});
+  const _DateField({
+    required this.maxLength,
+    required this.onChanged,
+    this.autofocus = false,
+  });
 
   final int maxLength;
   final bool autofocus;
+  final ValueChanged<String> onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +107,7 @@ class _DateField extends StatelessWidget {
       keyboardType: TextInputType.number,
       textAlign: TextAlign.center,
       maxLength: maxLength,
+      onChanged: onChanged,
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       style: const TextStyle(fontSize: 16),
       decoration: InputDecoration(

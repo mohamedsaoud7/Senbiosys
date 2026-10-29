@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:training/providers/create_account_provider.dart';
 import 'package:training/screens/create_account/charging_station_screen.dart';
 import 'package:training/widgets/account_background.dart';
 import 'package:training/widgets/app_button.dart';
@@ -38,6 +40,11 @@ class _HeightScreenState extends State<HeightScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final accountProvider = Provider.of<CreateAccountProvider>(
+      context,
+      listen: false,
+    );
+
     return AccountBackground(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
@@ -105,6 +112,14 @@ class _HeightScreenState extends State<HeightScreen> {
               backgroundColor: const Color(0xFFF8F8F7),
               foregroundColor: const Color(0xFF20232A),
               onPressed: () {
+                if (_useMetric) {
+                  accountProvider.saveHeight('$_selectedCentimeters cm');
+                } else {
+                  accountProvider.saveHeight(
+                    '$_selectedFeet ft $_selectedInches in',
+                  );
+                }
+
                 Navigator.push(
                   context,
                   MaterialPageRoute<void>(
